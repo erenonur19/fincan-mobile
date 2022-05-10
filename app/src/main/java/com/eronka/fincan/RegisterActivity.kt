@@ -42,19 +42,13 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this,"Lütfen Bilgilerinizi Eksiksiz ve Doğru bir şekilde giriniz..",Toast.LENGTH_LONG).show()
         }
 
-
-
-
-
     }
     fun geriDon(view: View){
-        val intent=Intent(this,MainActivity::class.java)
-        startActivity(intent)
         finish()
 
     }
     fun goLogin(view: View){
-        val intent=Intent(this,LoginActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent(this,LoginActivity::class.java))
+        finish()
     }
 }

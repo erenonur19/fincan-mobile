@@ -26,10 +26,9 @@ class LoginActivity : AppCompatActivity() {
 
             auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                 if(it.isSuccessful){
-
                     val intent= Intent(this,HomepageActivity::class.java)
-                    startActivity(intent)
                     finish()
+                    startActivity(intent)
                 }
             }.addOnFailureListener {
                 Toast.makeText(this,it.localizedMessage,Toast.LENGTH_LONG).show()
@@ -42,12 +41,11 @@ class LoginActivity : AppCompatActivity() {
 
     }
     fun geriDon(view:View){
-        val intent=Intent(this,MainActivity::class.java)
-        startActivity(intent)
+        finish()
     }
     fun goRegister(view:View){
-        val intent=Intent(this,RegisterActivity::class.java)
-        startActivity(intent)
+        startActivity(Intent(this,RegisterActivity::class.java))
+        finish()
     }
 
 }

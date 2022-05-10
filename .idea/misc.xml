@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/drawable/back_icon.xml" value="0.5475" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/drawable/ic_back.xml" value="0.5475" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/drawable/ic_email.xml" value="0.5475" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/drawable/ic_password_1.xml" value="0.5475" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/drawable/ic_password_2.xml" value="0.5475" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/layout/activity_homepage.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/layout/activity_login.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/layout/activity_register.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/ERONKA/AndroidStudioProjects/Fincan2/app/src/main/res/drawable/background_edittxt.xml" value="0.235" />
         <entry key="..\:/Users/ERONKA/AndroidStudioProjects/Fincan2/app/src/main/res/drawable/bckgrnd_btn.xml" value="0.235" />
         <entry key="..\:/Users/ERONKA/AndroidStudioProjects/Fincan2/app/src/main/res/drawable/bckgrnd_btn2.xml" value="0.235" />
