@@ -81,7 +81,7 @@
             android:paddingVertical="15dp"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:background="@color/black"
+            android:backgroundTint="@color/purple_theme_color"
             android:onClick="login"/>
 
         <LinearLayout

@@ -30,9 +30,6 @@ class RegisterActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
-
-
-
             }.addOnFailureListener {
                 Toast.makeText(this,it.localizedMessage,Toast.LENGTH_LONG).show()
             }
@@ -41,7 +38,6 @@ class RegisterActivity : AppCompatActivity() {
         else{
             Toast.makeText(this,"Lütfen Bilgilerinizi Eksiksiz ve Doğru bir şekilde giriniz..",Toast.LENGTH_LONG).show()
         }
-
     }
     fun geriDon(view: View){
         finish()
