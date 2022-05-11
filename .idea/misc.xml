@@ -12,7 +12,12 @@
         <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/layout/activity_login.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/layout/activity_main.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Bedirhan/Desktop/Fincan2/app/src/main/res/layout/activity_register.xml" value="0.5541666666666667" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/app_logo.xml" value="0.265" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/app_logo_back.xml" value="0.265" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/back_icon.xml" value="0.265" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/ic_add.xml" value="0.112" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/ic_applogo_background.xml" value="0.265" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/ic_applogoback_background.xml" value="0.265" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/ic_decrease.xml" value="0.112" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/ic_food_menu.xml" value="0.423" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/ic_log_out.xml" value="0.423" />
@@ -32,6 +37,7 @@
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/activity_main.xml" value="0.39537037037037037" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/activity_show_menu.xml" value="0.4244791666666667" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/activity_splash_screen.xml" value="0.31354166666666666" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/list_cafes_item.xml" value="0.28802083333333334" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/list_menu_item.xml" value="0.5" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/list_restaurants_item.xml" value="0.5" />
@@ -39,6 +45,9 @@
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/selected_menu_bottom_dialog.xml" value="0.4244791666666667" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/menu/menu.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/menu/nav_menu.xml" value="0.4244791666666667" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/mipmap-anydpi-v26/ic_applogo.xml" value="0.265" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/mipmap-anydpi-v26/ic_applogoback_round.xml" value="0.265" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.265" />
         <entry key="..\:/Users/ERONKA/AndroidStudioProjects/Fincan2/app/src/main/res/drawable/background_edittxt.xml" value="0.235" />
         <entry key="..\:/Users/ERONKA/AndroidStudioProjects/Fincan2/app/src/main/res/drawable/bckgrnd_btn.xml" value="0.235" />
         <entry key="..\:/Users/ERONKA/AndroidStudioProjects/Fincan2/app/src/main/res/drawable/bckgrnd_btn2.xml" value="0.235" />
