@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

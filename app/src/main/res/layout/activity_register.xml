@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
-        android:paddingBottom="50dp"
+        android:paddingTop="50dp"
+        android:paddingBottom="20dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="63dp"
         tools:ignore="MissingConstraints">
@@ -115,6 +116,7 @@
                 android:layout_weight="1"
                 android:enabled="true"
                 android:text="@string/register"
+                android:backgroundTint="@color/purple_theme_color"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:onClick="signUp"/>

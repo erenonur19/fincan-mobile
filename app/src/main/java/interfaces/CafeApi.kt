@@ -1,11 +1,10 @@
 package interfaces;
 
-import datamodels.CafeItem;
 
-enum class RequestType {
-    READ, OFFLINE_UPDATE
-}
+import datamodels.CafeItem
+import datamodels.MenuItem
+
 
 interface CafeApi {
-    fun onFetchSuccessListener(list:ArrayList<CafeItem>, requestType: RequestType)
+    fun onFetchSuccessListener(list:ArrayList<CafeItem>)
 }

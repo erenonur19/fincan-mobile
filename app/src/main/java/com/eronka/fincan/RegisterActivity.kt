@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
         auth= FirebaseAuth.getInstance()

@@ -3,14 +3,14 @@ package com.eronka.fincan
 import adapters.RecyclerCafeItemAdapter
 import services.FirebaseDBService
 import android.app.ProgressDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
+import androidx.appcompat.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +20,8 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import datamodels.CafeItem
 import interfaces.CafeApi
-import interfaces.RequestType
-import kotlinx.android.synthetic.main.activity_show_menu.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemClickListener, CafeApi {
@@ -29,11 +29,13 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
     private lateinit var database: DatabaseReference
     private lateinit var progressDialog: ProgressDialog
     private var allItems = ArrayList<CafeItem>()
+    private var tempItems = ArrayList<CafeItem>()
     private lateinit var itemRecyclerView: RecyclerView
     private lateinit var recyclerFoodAdapter: RecyclerCafeItemAdapter
     private lateinit var showAllSwitch: SwitchCompat
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.show()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
         auth= FirebaseAuth.getInstance()
@@ -41,14 +43,38 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
         loadMenu()
     }
 
-    fun emailGoster(){
-        //val user = User("bedo","bedo@bedo")
-        //database.child("restaurants").child("bedo").setValue(user)
-        val kullanici_mail = auth.currentUser?.email.toString()
-        auth.currentUser?.sendEmailVerification()
-        val kullaniciID=auth.currentUser?.email.toString()
-        Toast.makeText(this,"${kullanici_mail} li kullanıcı giriş yapmıştır", Toast.LENGTH_LONG).show()
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        val item = menu?.findItem(R.id.search_action)
+        val searchView = item?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+            override fun onQueryTextChange(p0: String?): Boolean {
+                tempItems.clear()
+                val searchText = p0!!.toLowerCase(Locale.getDefault())
+                if (searchText.isNotEmpty()){
+                    allItems.forEach {
+                        if(it.cafeName.lowercase(Locale.getDefault()).contains(searchText)){
+                            tempItems.add(it)
+                        }else if(it.cafeAddress.lowercase(Locale.getDefault()).contains(searchText)){
+                            tempItems.add(it)
+                        }
+                    }
+                    itemRecyclerView.adapter!!.notifyDataSetChanged()
+                }else{
+                    tempItems.clear()
+                    tempItems.addAll(allItems)
+                    itemRecyclerView.adapter!!.notifyDataSetChanged()
+                }
+                return false
+            }
+        })
+        return super.onCreateOptionsMenu(menu)
     }
+
     fun logOut(view:View){
         auth.signOut()
         startActivity(Intent(this, MainActivity::class.java))
@@ -60,13 +86,13 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
         itemRecyclerView = findViewById(R.id.cafes_recycler_view)
         recyclerFoodAdapter = RecyclerCafeItemAdapter(
             applicationContext,
-            allItems,
+            tempItems,
             sharedPref.getInt("loadItemImages", 0),
             this
         )
         itemRecyclerView.adapter = recyclerFoodAdapter
         itemRecyclerView.layoutManager = LinearLayoutManager(this@HomepageActivity)
-        recyclerFoodAdapter.filterList(allItems) //display complete list
+        recyclerFoodAdapter.filterList(tempItems) //display complete list
         loadOnlineMenu()
 
     }
@@ -79,21 +105,21 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
         progressDialog.create()
         progressDialog.show()
 
-        FirebaseDBService().readAllMenu(this, RequestType.READ)
+        FirebaseDBService().readAllCafe(this)
     }
 
     override fun onItemClick(item: CafeItem) {
-
+        val intent = Intent(this,ShowMenuActivity::class.java)
+        intent.putExtra("cafekey",item.cafeKey)
+        startActivity(intent)
     }
 
-    override fun onFetchSuccessListener(list: ArrayList<CafeItem>, requestType: RequestType) {
-        if (requestType == RequestType.READ) {
-            for (item in list) {
-                println(item.email)
-                allItems.add(item)
-            }
-            recyclerFoodAdapter.notifyItemRangeInserted(0, allItems.size)
+    override fun onFetchSuccessListener(list: ArrayList<CafeItem>) {
+        for (item in list) {
+            allItems.add(item)
         }
+        tempItems.addAll(allItems)
+        recyclerFoodAdapter.notifyItemRangeInserted(0, tempItems.size)
 
         progressDialog.dismiss()
     }

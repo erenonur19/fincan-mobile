@@ -8,6 +8,7 @@ import com.eronka.fincan.R
 import datamodels.CafeItem
 import java.util.*
 import kotlin.collections.ArrayList
+import com.squareup.picasso.Picasso
 
 class RecyclerCafeItemAdapter (
     var context: Context,
@@ -26,6 +27,7 @@ class RecyclerCafeItemAdapter (
         val cafeImage: ImageView = itemView.findViewById(R.id.item_image)
         val cafeName: TextView = itemView.findViewById(R.id.item_name)
         val cafeStars: TextView = itemView.findViewById(R.id.item_stars)
+        val cafeAddress: TextView = itemView.findViewById(R.id.list_cafes_item)
 
     }
 
@@ -38,15 +40,12 @@ class RecyclerCafeItemAdapter (
 
     override fun onBindViewHolder(holder: ItemListViewHolder, position: Int) {
         val currentItem = itemList[position]
-
-        if (loadDefaultImage == 1) holder.cafeImage.setImageResource(R.drawable.default_item_image)
-        //else Picasso.get().load(currentItem.imageUrl).into(holder.cafeImage)
-
+        if (currentItem.imageUrl != null && currentItem.imageUrl != ""){
+            Picasso.get().load(currentItem.imageUrl).into(holder.cafeImage)
+        }
         holder.cafeName.text = currentItem.cafeName
         holder.cafeStars.text = currentItem.cafeStars.toString()
-
-
-
+        holder.cafeAddress.text = currentItem.cafeAddress
         holder.itemView.setOnClickListener {
             listener.onItemClick(currentItem)
         }

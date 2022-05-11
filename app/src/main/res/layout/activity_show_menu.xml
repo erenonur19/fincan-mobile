@@ -15,47 +15,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!--Top Nav-->
-        <LinearLayout
-            android:id="@+id/main_activity_top_header_ll"
-            android:visibility="visible"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="8dp"
-            android:clipToPadding="false">
-
-            <ImageView
-                android:id="@+id/nav_drawer_opener_iv"
-                android:layout_width="25dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_menu_2"
-                app:tint="@color/text_dark_color"
-                android:contentDescription="@string/menu_icon"
-                android:layout_marginEnd="20dp"
-                android:background="?android:attr/selectableItemBackground"/>
-
-            <TextView
-                android:id="@+id/top_wish_name_tv"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/hi"
-                android:textSize="22sp"
-                android:textColor="#1C213F"
-                android:fontFamily="@font/montserrat_semi_bold"/>
-
-            <ImageView
-                android:id="@+id/main_activity_search_iv"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_search"/>
-
-        </LinearLayout>
-
         <LinearLayout
             android:id="@+id/main_activity_top_search_ll"
             android:visibility="gone"
@@ -89,35 +48,6 @@
 
             <!--Food Categories-->
 
-            <LinearLayout
-                android:id="@+id/main_activity_show_all_ll"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:paddingStart="20dp"
-                android:paddingEnd="5dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="@string/here_s_what_i_found_for_you"
-                    android:textSize="12sp" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/show_all_items_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="true"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:minHeight="0dp"
-                    android:scaleX="0.8"
-                    android:scaleY="0.8"
-                    android:text="@string/show_all" />
-
-            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -144,7 +74,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/left_corner_curve"
-                    android:onClick="showBottomDialog"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
 
@@ -173,6 +103,6 @@
         app:itemTextColor="@color/text_light_color"
         app:headerLayout="@layout/nav_header"
         android:scrollbarThumbVertical="@android:color/transparent"
-        app:menu="@menu/nav_menu"/>
+        app:menu="@menu/menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
