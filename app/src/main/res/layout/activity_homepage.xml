@@ -10,6 +10,7 @@
     tools:context=".HomepageActivity"
     android:background="#E6F8F8F8">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -74,24 +75,48 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <TextView
+                        android:id="@+id/restaurant_sayisi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="11dp"
+                        android:text="TextView"
+                        app:layout_constraintBottom_toTopOf="@+id/cafes_recycler_view"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginHorizontal="10dp">
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigator"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/purple_theme_color"
-                android:onClick="logOut"
-                android:text="LOGOUT" />
+                android:layout_alignParentBottom="true"
+                app:itemBackground="@color/purple_theme_color"
+                app:itemIconTint="@drawable/selector"
+                app:itemTextColor="@drawable/selector"
+                app:menu="@menu/menu2">
+
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
+
         </LinearLayout>
 
+
+
     </LinearLayout>
+
+
+
+
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -20,12 +20,13 @@
 
     <ImageView
         android:id="@+id/splash_screen_app_logo_iv"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/appic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:paddingTop="30dp"
+        android:layout_width="370dp"
+        android:layout_height="406dp"
+        android:src="@drawable/fincan"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

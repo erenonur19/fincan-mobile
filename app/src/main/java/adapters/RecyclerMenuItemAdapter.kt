@@ -28,6 +28,8 @@ class RecyclerMenuItemAdapter(
 
     interface OnItemClickListener {
         fun onItemClick(item: MenuItem)
+        fun onPlusBtnClick(item: MenuItem)
+        fun onMinusBtnClick(item: MenuItem)
     }
 
     class ItemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,6 +38,8 @@ class RecyclerMenuItemAdapter(
         val itemStars: TextView = itemView.findViewById(R.id.item_stars)
         val itemCategory: TextView = itemView.findViewById(R.id.item_category)
         val itemPrice: TextView = itemView.findViewById(R.id.item_price)
+        val increase : ImageView = itemView.findViewById(R.id.increase_item_quantity_iv)
+        val decrease : ImageView = itemView.findViewById(R.id.decrease_item_quantity_iv)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
@@ -54,8 +58,20 @@ class RecyclerMenuItemAdapter(
         holder.itemName.text = currentItem.itemName
         holder.itemStars.text = currentItem.itemStars.toString()
         holder.itemCategory.text = currentItem.itemCategory
-        holder.itemPrice.text = currentItem.itemPrice.toString()
+        holder.itemPrice.text = currentItem.itemPrice.toString() + "₺"
+        holder.increase.setOnClickListener {
+            //val n = currentItem.quantity
+            //holder.itemQuantityTV.text = (n+1).toString()
 
+            listener.onPlusBtnClick(currentItem)
+        }
+
+        holder.decrease.setOnClickListener {
+            //val n = currentItem.quantity
+            //if (n == 0) return@setOnClickListener
+            //holder.itemQuantityTV.text = (n-1).toString()
+            listener.onMinusBtnClick(currentItem)
+        }
         holder.itemView.setOnClickListener {
             listener.onItemClick(currentItem)
         }

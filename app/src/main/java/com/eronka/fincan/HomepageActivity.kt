@@ -14,17 +14,22 @@ import android.widget.Toast
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import datamodels.CafeItem
 import interfaces.CafeApi
+import kotlinx.android.synthetic.main.activity_homepage.*
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemClickListener, CafeApi {
+
+
     private lateinit var auth: FirebaseAuth
     private lateinit var database: DatabaseReference
     private lateinit var progressDialog: ProgressDialog
@@ -33,14 +38,34 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
     private lateinit var itemRecyclerView: RecyclerView
     private lateinit var recyclerFoodAdapter: RecyclerCafeItemAdapter
     private lateinit var showAllSwitch: SwitchCompat
+    lateinit var bottomNavigationView1: BottomNavigationView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.show()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
+
         auth= FirebaseAuth.getInstance()
         database = Firebase.database.reference
         loadMenu()
+
+        bottomNavigationView1=findViewById(R.id.bottom_navigator)
+        bottomNavigationView1.setOnItemSelectedListener {
+            if(it.itemId==1){
+
+                false
+            }
+            else{
+                val intent=Intent(this,SearchActivity::class.java)
+                startActivity(intent)
+                true
+            }
+        }
+
+
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -93,7 +118,9 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
         itemRecyclerView.adapter = recyclerFoodAdapter
         itemRecyclerView.layoutManager = LinearLayoutManager(this@HomepageActivity)
         recyclerFoodAdapter.filterList(tempItems) //display complete list
+
         loadOnlineMenu()
+
 
     }
 
@@ -122,5 +149,6 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
         recyclerFoodAdapter.notifyItemRangeInserted(0, tempItems.size)
 
         progressDialog.dismiss()
+        restaurant_sayisi.text= "${tempItems.size} kafe listelendi."
     }
 }

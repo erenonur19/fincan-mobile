@@ -1,11 +1,13 @@
 package com.eronka.fincan
 
+import adapters.RecyclerCafeItemAdapter
 import adapters.RecyclerMenuItemAdapter
 import android.app.ProgressDialog
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SwitchCompat
@@ -121,4 +123,15 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
     override fun onItemClick(item: MenuItem) {
         Toast.makeText(this,"${item.cafeKey}",Toast.LENGTH_LONG).show()
     }
+
+    override fun onPlusBtnClick(item: MenuItem) {
+        Toast.makeText(this,"plus " + item.itemName,Toast.LENGTH_SHORT).show()
+
+    }
+
+    override fun onMinusBtnClick(item: MenuItem) {
+        Toast.makeText(this,"minus " + item.itemName,Toast.LENGTH_SHORT).show()
+    }
+
+
 }

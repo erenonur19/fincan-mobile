@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/anasayfa"
+        android:title="Anasayfa"
+        android:icon="@drawable/ic_homepage"
+       ></item>
+    <item android:id="@+id/arama"
+        android:title="Arama"
+        android:icon="@drawable/ic_search"></item>
+    <item android:id="@+id/sepet"
+        android:title="Sepet"
+        android:icon="@drawable/ic_basket"></item>
+</menu>
