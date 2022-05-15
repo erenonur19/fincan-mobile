@@ -1,5 +1,7 @@
 package datamodels
 
+import java.io.Serializable
+
 data class CafeItem(
     var email: String = "COFFEE_ID",
     var cafeName: String = "CAFE_NAME",
@@ -7,4 +9,4 @@ data class CafeItem(
     var imageUrl: String = "IMAGE_URL",
     var cafeKey: String = "key",
     var cafeStars: Float = 0f,
-)
+) : Serializable

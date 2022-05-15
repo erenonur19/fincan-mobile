@@ -1,27 +1,29 @@
 package com.eronka.fincan
 
-import adapters.RecyclerCafeItemAdapter
 import adapters.RecyclerMenuItemAdapter
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
-import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import datamodels.CafeItem
 import datamodels.MenuItem
 import interfaces.ItemApi
 import services.FirebaseDBService
+import java.io.Serializable
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemClickListener, ItemApi {
     private lateinit var auth: FirebaseAuth
@@ -32,7 +34,8 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
     private lateinit var itemRecyclerView: RecyclerView
     private lateinit var recyclerItemAdapter: RecyclerMenuItemAdapter
     private lateinit var showAllSwitch: SwitchCompat
-
+    var basketList = mutableListOf<MenuItem>()
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.show()
         super.onCreate(savedInstanceState)
@@ -40,6 +43,44 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         auth= FirebaseAuth.getInstance()
         database = Firebase.database.reference
         loadItems()
+        val args = intent.getBundleExtra("BUNDLE")
+        basketList = (args!!.getSerializable("map") as MutableList<MenuItem>?)!!
+
+        bottomNavigationView1=findViewById(R.id.bottom_navigator)
+        bottomNavigationView1.selectedItemId = 2131296334
+        bottomNavigationView1.setOnItemSelectedListener {
+            // homepage  2131296334
+            // search    2131296339
+            // basket    2131296674
+            // profile   2131296793
+            if(it.itemId == 2131296339){
+                val intent = Intent(this,SearchActivity::class.java)
+                val args: Bundle = Bundle()
+                args.putSerializable("map", basketList as Serializable)
+                intent.putExtra("BUNDLE", args)
+                startActivity(intent)
+                finish()
+            }
+            else if(it.itemId == 2131296674){
+                val intent = Intent(this,BasketActivity::class.java)
+                val args: Bundle = Bundle()
+                args.putSerializable("map", basketList as Serializable)
+                intent.putExtra("BUNDLE", args)
+                startActivity(intent)
+                finish()
+            }else if(it.itemId == 2131296793){
+                val intent = Intent(this,UserProfileActivity::class.java)
+                val args: Bundle = Bundle()
+                args.putSerializable("map", basketList as Serializable)
+                intent.putExtra("BUNDLE", args)
+                startActivity(intent)
+                finish()
+            }
+            true
+        }
+
+        //Toast.makeText(this, bundle?.get(3)?.toString(),Toast.LENGTH_LONG).show()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -49,7 +90,7 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                return false
+                return true
             }
             override fun onQueryTextChange(p0: String?): Boolean {
                 tempItems.clear()
@@ -74,8 +115,6 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
 
         return super.onCreateOptionsMenu(menu)
     }
-
-
 
     private fun loadItems() {
         val sharedPref: SharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
@@ -124,13 +163,29 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         Toast.makeText(this,"${item.cafeKey}",Toast.LENGTH_LONG).show()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onPlusBtnClick(item: MenuItem) {
-        Toast.makeText(this,"plus " + item.itemName,Toast.LENGTH_SHORT).show()
+        if (item.quantity == 0){
+            item.quantity = 1
+            basketList.add(item)
+        }else{
+            item.quantity += 1
+        }
+        itemRecyclerView.adapter!!.notifyDataSetChanged()
+        //Toast.makeText(this,"plus " + item.itemName,Toast.LENGTH_SHORT).show()
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onMinusBtnClick(item: MenuItem) {
-        Toast.makeText(this,"minus " + item.itemName,Toast.LENGTH_SHORT).show()
+        if (item.quantity != 0){
+            item.quantity -= 1
+            if(item.quantity == 0){
+                basketList.remove(item)
+            }
+        }
+        itemRecyclerView.adapter!!.notifyDataSetChanged()
+
     }
 
 

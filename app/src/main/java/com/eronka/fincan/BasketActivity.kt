@@ -1,0 +1,184 @@
+package com.eronka.fincan
+
+import adapters.RecyclerCafeItemAdapter
+import adapters.RecyclerMenuItemAdapter
+import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.TimePickerDialog
+import android.content.DialogInterface
+import android.content.Intent
+import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
+import android.widget.TimePicker
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import java.io.Serializable
+import java.lang.Exception
+import java.text.SimpleDateFormat
+import java.util.*
+
+class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, RecyclerMenuItemAdapter.OnItemClickListener  {
+
+    private lateinit var itemRecyclerView: RecyclerView
+    private lateinit var recyclerAdapter: RecyclerMenuItemAdapter
+    var basketList = arrayListOf<datamodels.MenuItem>()
+
+    private lateinit var totalItemsTV: TextView
+    private lateinit var totalPriceTV: TextView
+    private lateinit var totalTaxTV: TextView
+    private lateinit var subTotalTV: TextView
+    private lateinit var proceedToPayBtn: Button
+    private lateinit var orderTakeAwayTV: TextView
+
+    private var totalPrice: Float = 0F
+    private var totalItems: Int = 0
+    private var totalTax: Float = 0F
+
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setIcon(R.drawable.ic_alert)
+            .setTitle("Alert!")
+            .setMessage("Do you want to cancel your order?")
+            .setPositiveButton("Yes", DialogInterface.OnClickListener { _, _ ->
+                super.onBackPressed()
+            })
+            .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, _ ->
+                dialogInterface.dismiss()
+            })
+            .create().show()
+    }
+
+    @SuppressLint("ResourceType")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
+        val sharedPref: SharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_basket)
+        itemRecyclerView = findViewById(R.id.order_recycler_view)
+        val args = intent.getBundleExtra("BUNDLE")
+        basketList = (args!!.getSerializable("map") as ArrayList<datamodels.MenuItem>?)!!
+        recyclerAdapter = RecyclerMenuItemAdapter(
+            applicationContext,
+            basketList,
+            sharedPref.getInt("loadItemImages", 0),
+            this
+        )
+        loadItems()
+
+        bottomNavigationView1=findViewById(R.id.bottom_navigator)
+        bottomNavigationView1.selectedItemId = 2131296674
+        bottomNavigationView1.setOnItemSelectedListener {
+            // homepage  2131296334
+            // search    2131296339
+            // basket    2131296674
+            // profile   2131296793
+            if(it.itemId==2131296334){
+                val intent = Intent(this,HomepageActivity::class.java)
+                val args: Bundle = Bundle()
+                args.putSerializable("map", basketList as Serializable)
+                intent.putExtra("BUNDLE", args)
+                startActivity(intent)
+                finish()
+            }else if(it.itemId == 2131296339){
+                val intent = Intent(this,SearchActivity::class.java)
+                val args: Bundle = Bundle()
+                args.putSerializable("map", basketList as Serializable)
+                intent.putExtra("BUNDLE", args)
+                startActivity(intent)
+                finish()
+            }
+            else if(it.itemId == 2131296793){
+                val intent = Intent(this,UserProfileActivity::class.java)
+                val args: Bundle = Bundle()
+                args.putSerializable("map", basketList as Serializable)
+                intent.putExtra("BUNDLE", args)
+                startActivity(intent)
+                finish()
+            }
+            true
+        }
+
+        totalItemsTV = findViewById(R.id.order_total_items_tv)
+        totalPriceTV = findViewById(R.id.order_total_price_tv)
+        totalTaxTV = findViewById(R.id.order_total_tax_tv)
+        subTotalTV = findViewById(R.id.order_sub_total_tv)
+        proceedToPayBtn = findViewById(R.id.proceed_to_pay_btn)
+        orderTakeAwayTV = findViewById(R.id.order_take_away_time_tv)
+
+        totalPrice = intent.getFloatExtra("totalPrice", 0F)
+        totalItems = intent.getIntExtra("totalItems", 0)
+        totalTax = totalPrice * 0.12F
+
+    }
+    private fun loadItems() {
+        val sharedPref: SharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
+
+        itemRecyclerView = findViewById(R.id.order_recycler_view)
+        recyclerAdapter = RecyclerMenuItemAdapter(
+            applicationContext,
+            basketList,
+            sharedPref.getInt("loadItemImages", 0),
+            this
+        )
+        itemRecyclerView.adapter = recyclerAdapter
+        itemRecyclerView.layoutManager = LinearLayoutManager(this@BasketActivity)
+        recyclerAdapter.filterList(basketList) //display complete list
+    }
+
+    fun goBack(view: View){
+        finish()
+    }
+    fun changeOrderTakeAwayTime(view: View) {
+        val c = Calendar.getInstance()
+        val hour = c.get(Calendar.HOUR)
+        val minute = c.get(Calendar.MINUTE)
+        val timePickerDialog = TimePickerDialog(this, this, hour, minute, true)
+        timePickerDialog.show()
+    }
+
+    override fun onTimeSet(p0: TimePicker?, hourOfDay: Int, minute: Int) {
+        val time = "$hourOfDay:$minute"
+        val f24Hours = SimpleDateFormat("HH:mm")
+        try {
+            val date = f24Hours.parse(time)
+            val f12Hours = SimpleDateFormat("hh:mm aa")
+            orderTakeAwayTV.text = f12Hours.format(date)
+        } catch (e: Exception) {}
+    }
+
+    override fun onItemClick(item: datamodels.MenuItem) {
+        TODO("Not yet implemented")
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onPlusBtnClick(item: datamodels.MenuItem) {
+        if (item.quantity == 0){
+            item.quantity = 1
+            basketList.add(item)
+        }else{
+            item.quantity += 1
+        }
+        itemRecyclerView.adapter!!.notifyDataSetChanged()
+        //Toast.makeText(this,"plus " + item.itemName,Toast.LENGTH_SHORT).show()
+
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onMinusBtnClick(item: datamodels.MenuItem) {
+        if (item.quantity != 0){
+            item.quantity -= 1
+            if(item.quantity == 0){
+                basketList.remove(item)
+            }
+        }
+        itemRecyclerView.adapter!!.notifyDataSetChanged()
+        itemRecyclerView.adapter!!.notifyItemChanged(basketList.indexOf(item))
+
+    }
+}

@@ -40,6 +40,7 @@ class RecyclerMenuItemAdapter(
         val itemPrice: TextView = itemView.findViewById(R.id.item_price)
         val increase : ImageView = itemView.findViewById(R.id.increase_item_quantity_iv)
         val decrease : ImageView = itemView.findViewById(R.id.decrease_item_quantity_iv)
+        val itemQuantity: TextView = itemView.findViewById(R.id.item_quantity_tv)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemListViewHolder {
@@ -58,11 +59,16 @@ class RecyclerMenuItemAdapter(
         holder.itemName.text = currentItem.itemName
         holder.itemStars.text = currentItem.itemStars.toString()
         holder.itemCategory.text = currentItem.itemCategory
+        if(currentItem.quantity == 0){
+            holder.itemPrice.text = currentItem.itemPrice.toString() + "₺"
+        }else{
+            holder.itemPrice.text = (currentItem.itemPrice * currentItem.quantity).toString() + "₺"
+        }
         holder.itemPrice.text = currentItem.itemPrice.toString() + "₺"
+        holder.itemQuantity.text = currentItem.quantity.toString()
         holder.increase.setOnClickListener {
             //val n = currentItem.quantity
             //holder.itemQuantityTV.text = (n+1).toString()
-
             listener.onPlusBtnClick(currentItem)
         }
 
@@ -80,6 +86,7 @@ class RecyclerMenuItemAdapter(
     override fun getItemCount(): Int = itemList.size
 
     fun filterList(filteredList: ArrayList<MenuItem>) {
+        println(filteredList)
         itemList = filteredList
         notifyDataSetChanged()
     }

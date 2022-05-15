@@ -12,12 +12,14 @@ class SplashScreenActivity : AppCompatActivity() {
     private lateinit var appTextBack: ImageView
 
     override fun onStart() {
+        supportActionBar?.hide()
         super.onStart()
         window.statusBarColor = resources.getColor(R.color.purple_theme_color)
         window.navigationBarColor = resources.getColor(R.color.purple_theme_color)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 

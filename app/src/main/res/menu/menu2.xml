@@ -10,4 +10,7 @@
     <item android:id="@+id/sepet"
         android:title="Sepet"
         android:icon="@drawable/ic_basket"></item>
+    <item android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_profile"></item>
 </menu>

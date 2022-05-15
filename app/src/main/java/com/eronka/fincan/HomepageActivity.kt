@@ -1,30 +1,30 @@
 package com.eronka.fincan
 
 import adapters.RecyclerCafeItemAdapter
-import services.FirebaseDBService
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.View
-import androidx.appcompat.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import datamodels.CafeItem
+import datamodels.MenuItem
 import interfaces.CafeApi
 import kotlinx.android.synthetic.main.activity_homepage.*
+import services.FirebaseDBService
 import java.util.*
-import kotlin.collections.ArrayList
+import java.io.*
 
 
 class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemClickListener, CafeApi {
@@ -39,6 +39,7 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
     private lateinit var recyclerFoodAdapter: RecyclerCafeItemAdapter
     private lateinit var showAllSwitch: SwitchCompat
     lateinit var bottomNavigationView1: BottomNavigationView
+    var basketList = mutableListOf<MenuItem>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,20 +53,35 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
 
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
         bottomNavigationView1.setOnItemSelectedListener {
-            if(it.itemId==1){
-
-                false
-            }
-            else{
-                val intent=Intent(this,SearchActivity::class.java)
+            // homepage  2131296334
+            // search    2131296339
+            // basket    2131296674
+            // profile   2131296793
+            if(it.itemId == 2131296339){
+                val intent = Intent(this,SearchActivity::class.java)
+                val args: Bundle = Bundle()
+                args.putSerializable("map", basketList as Serializable)
+                intent.putExtra("BUNDLE", args)
                 startActivity(intent)
-                true
+                finish()
             }
+            else if(it.itemId == 2131296674){
+                val intent = Intent(this,BasketActivity::class.java)
+                val args: Bundle = Bundle()
+                args.putSerializable("map", basketList as Serializable)
+                intent.putExtra("BUNDLE", args)
+                startActivity(intent)
+                finish()
+            }else if(it.itemId == 2131296793){
+                val intent = Intent(this,UserProfileActivity::class.java)
+                val args: Bundle = Bundle()
+                args.putSerializable("map", basketList as Serializable)
+                intent.putExtra("BUNDLE", args)
+                startActivity(intent)
+                finish()
+            }
+            true
         }
-
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -120,8 +136,6 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
         recyclerFoodAdapter.filterList(tempItems) //display complete list
 
         loadOnlineMenu()
-
-
     }
 
     private fun loadOnlineMenu() {
@@ -138,6 +152,11 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
     override fun onItemClick(item: CafeItem) {
         val intent = Intent(this,ShowMenuActivity::class.java)
         intent.putExtra("cafekey",item.cafeKey)
+
+        val args: Bundle = Bundle()
+        args.putSerializable("map", basketList as Serializable)
+        intent.putExtra("BUNDLE", args)
+        intent.putExtra("cafe",item)
         startActivity(intent)
     }
 
