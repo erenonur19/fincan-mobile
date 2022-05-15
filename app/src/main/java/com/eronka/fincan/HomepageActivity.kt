@@ -41,12 +41,15 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
     lateinit var bottomNavigationView1: BottomNavigationView
     var basketList = mutableListOf<MenuItem>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.show()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_homepage)
+        val args = intent.getBundleExtra("BUNDLE")
 
+        if (args != null){
+            basketList = (args!!.getSerializable("map") as ArrayList<MenuItem>?)!!
+        }
         auth= FirebaseAuth.getInstance()
         database = Firebase.database.reference
         loadMenu()

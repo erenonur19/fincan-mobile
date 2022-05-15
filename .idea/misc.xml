@@ -15,6 +15,8 @@
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable-xhdpi/horizontal_line.xml" value="0.312" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable-xhdpi/ic_alert.xml" value="0.312" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable-xhdpi/ic_help.xml" value="0.4715" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable-xhdpi/ic_message.xml" value="0.5225" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable-xhdpi/ic_send.xml" value="0.5225" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable-xhdpi/ic_time.xml" value="0.4715" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable-xxhdpi/ic_daily_order.xml" value="0.231" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable-xxhdpi/ic_reg_id.xml" value="0.2915" />
@@ -42,6 +44,7 @@
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/left_corner_curve.xml" value="0.423" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/drawable/top_curve_rectangle.xml" value="0.423" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/activity_basket.xml" value="0.5" />
+        <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/activity_contact_us.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/activity_homepage.xml" value="0.5" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/Bedirhan/Desktop/Repos/fincan-mobile/app/src/main/res/layout/activity_main.xml" value="0.39537037037037037" />

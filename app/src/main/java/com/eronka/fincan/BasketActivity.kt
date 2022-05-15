@@ -22,6 +22,7 @@ import java.io.Serializable
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.roundToInt
 
 class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, RecyclerMenuItemAdapter.OnItemClickListener  {
 
@@ -63,13 +64,16 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
         itemRecyclerView = findViewById(R.id.order_recycler_view)
         val args = intent.getBundleExtra("BUNDLE")
         basketList = (args!!.getSerializable("map") as ArrayList<datamodels.MenuItem>?)!!
+        if (basketList == null){
+            basketList = arrayListOf()
+        }
         recyclerAdapter = RecyclerMenuItemAdapter(
             applicationContext,
             basketList,
             sharedPref.getInt("loadItemImages", 0),
             this
         )
-        loadItems()
+
 
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
         bottomNavigationView1.selectedItemId = 2131296674
@@ -111,11 +115,22 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
         proceedToPayBtn = findViewById(R.id.proceed_to_pay_btn)
         orderTakeAwayTV = findViewById(R.id.order_take_away_time_tv)
 
-        totalPrice = intent.getFloatExtra("totalPrice", 0F)
-        totalItems = intent.getIntExtra("totalItems", 0)
+        totalPrice = 0F
+        totalItems = 0
         totalTax = totalPrice * 0.12F
 
+        var c : Calendar = Calendar.getInstance()
+        var df : SimpleDateFormat? = null
+        var formattedDate = ""
+
+        // goes to main method or onCreate(Android)
+        df = SimpleDateFormat("hh:mm a")
+        formattedDate = df!!.format(c.time)
+        orderTakeAwayTV.text = formattedDate
+        loadItems()
+
     }
+    @SuppressLint("SetTextI18n")
     private fun loadItems() {
         val sharedPref: SharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
 
@@ -129,6 +144,25 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
         itemRecyclerView.adapter = recyclerAdapter
         itemRecyclerView.layoutManager = LinearLayoutManager(this@BasketActivity)
         recyclerAdapter.filterList(basketList) //display complete list
+
+        totalPrice = 0F
+        totalItems = 0
+        basketList.forEach {
+            totalPrice += it.itemPrice * it.quantity
+            if(it.quantity != 0){
+                totalItems++
+            }
+        }
+        totalTax = ((totalPrice * 0.12F)* 100.0F).roundToInt() / 100.0F
+        totalItemsTV.text = totalItems.toString()
+        totalPriceTV.text = (((totalPrice* 100.0F).roundToInt() / 100.0F)).toString() + "₺"
+        totalTaxTV.text = (((totalTax* 100.0F).roundToInt() / 100.0F)).toString() + "₺"
+        subTotalTV.text = (((totalPrice + totalTax)* 100.0F).roundToInt() / 100.0F).toString() + "₺"
+        if(totalItems == 0){
+            totalPriceTV.text = "-"
+            totalTaxTV.text = "-"
+            subTotalTV.text = "-"
+        }
     }
 
     fun goBack(view: View){
@@ -151,34 +185,33 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
             orderTakeAwayTV.text = f12Hours.format(date)
         } catch (e: Exception) {}
     }
+    fun contactUs(view: View){
+        val intent = Intent(this,ContactUsActivity::class.java)
+        startActivity(intent)
+    }
 
     override fun onItemClick(item: datamodels.MenuItem) {
-        TODO("Not yet implemented")
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onPlusBtnClick(item: datamodels.MenuItem) {
         if (item.quantity == 0){
             item.quantity = 1
-            basketList.add(item)
         }else{
             item.quantity += 1
         }
-        itemRecyclerView.adapter!!.notifyDataSetChanged()
-        //Toast.makeText(this,"plus " + item.itemName,Toast.LENGTH_SHORT).show()
+        loadItems()
 
+        //Toast.makeText(this,"plus " + item.itemName,Toast.LENGTH_SHORT).show()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onMinusBtnClick(item: datamodels.MenuItem) {
         if (item.quantity != 0){
             item.quantity -= 1
-            if(item.quantity == 0){
-                basketList.remove(item)
-            }
         }
-        itemRecyclerView.adapter!!.notifyDataSetChanged()
-        itemRecyclerView.adapter!!.notifyItemChanged(basketList.indexOf(item))
+        loadItems()
 
     }
 }

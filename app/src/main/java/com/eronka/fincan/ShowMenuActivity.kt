@@ -45,7 +45,9 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         loadItems()
         val args = intent.getBundleExtra("BUNDLE")
         basketList = (args!!.getSerializable("map") as MutableList<MenuItem>?)!!
-
+        if (basketList == null){
+            basketList = mutableListOf()
+        }
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
         bottomNavigationView1.selectedItemId = 2131296334
         bottomNavigationView1.setOnItemSelectedListener {
@@ -146,9 +148,7 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
 
     override fun onFetchSuccessListener(list: ArrayList<MenuItem>) {
         for (item in list) {
-            println(intent.getStringExtra("cafekey"))
             if (item.cafeKey.equals(intent.getStringExtra("cafekey"))){
-
                 allItems.add(item)
             }
         }

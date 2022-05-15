@@ -86,7 +86,6 @@ class RecyclerMenuItemAdapter(
     override fun getItemCount(): Int = itemList.size
 
     fun filterList(filteredList: ArrayList<MenuItem>) {
-        println(filteredList)
         itemList = filteredList
         notifyDataSetChanged()
     }

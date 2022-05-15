@@ -15,6 +15,9 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
         val args = intent.getBundleExtra("BUNDLE")
         basketList = (args!!.getSerializable("map") as MutableList<MenuItem>?)!!
+        if (basketList == null){
+            basketList = mutableListOf()
+        }
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
         bottomNavigationView1.selectedItemId = 2131296339
         bottomNavigationView1.setOnItemSelectedListener {
