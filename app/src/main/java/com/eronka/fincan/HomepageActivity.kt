@@ -1,6 +1,7 @@
 package com.eronka.fincan
 
 import adapters.RecyclerCafeItemAdapter
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
@@ -56,10 +57,11 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
 
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
         bottomNavigationView1.setOnItemSelectedListener {
+            println(it.itemId)
             // homepage  2131296334
             // search    2131296339
-            // basket    2131296674
-            // profile   2131296793
+            // basket    2131296736
+            // profile   2131296678
             if(it.itemId == 2131296339){
                 val intent = Intent(this,SearchActivity::class.java)
                 val args: Bundle = Bundle()
@@ -68,14 +70,14 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
                 startActivity(intent)
                 finish()
             }
-            else if(it.itemId == 2131296674){
+            else if(it.itemId == 2131296736){
                 val intent = Intent(this,BasketActivity::class.java)
                 val args: Bundle = Bundle()
                 args.putSerializable("map", basketList as Serializable)
                 intent.putExtra("BUNDLE", args)
                 startActivity(intent)
                 finish()
-            }else if(it.itemId == 2131296793){
+            }else if(it.itemId == 2131296678){
                 val intent = Intent(this,UserProfileActivity::class.java)
                 val args: Bundle = Bundle()
                 args.putSerializable("map", basketList as Serializable)
@@ -144,8 +146,8 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
     private fun loadOnlineMenu() {
         progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
-        progressDialog.setTitle("Loading Menu...")
-        progressDialog.setMessage("For fast and smooth experience, you can download Menu for Offline.")
+        progressDialog.setTitle("Loading Cafes...")
+        progressDialog.setMessage("For fast and smooth experience, please wait cafes to be downloaded.")
         progressDialog.create()
         progressDialog.show()
 
@@ -163,6 +165,7 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
         startActivity(intent)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onFetchSuccessListener(list: ArrayList<CafeItem>) {
         for (item in list) {
             allItems.add(item)
@@ -171,6 +174,6 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
         recyclerFoodAdapter.notifyItemRangeInserted(0, tempItems.size)
 
         progressDialog.dismiss()
-        restaurant_sayisi.text= "${tempItems.size} kafe listelendi."
+        restaurant_sayisi.text= "${tempItems.size} cafe listed!"
     }
 }

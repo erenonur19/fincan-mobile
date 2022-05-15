@@ -23,8 +23,8 @@ class SearchActivity : AppCompatActivity() {
         bottomNavigationView1.setOnItemSelectedListener {
             // homepage  2131296334
             // search    2131296339
-            // basket    2131296674
-            // profile   2131296793
+            // basket    2131296736
+            // profile   2131296678
             if(it.itemId==2131296334){
                 val intent = Intent(this,HomepageActivity::class.java)
                 val args: Bundle = Bundle()
@@ -32,14 +32,14 @@ class SearchActivity : AppCompatActivity() {
                 intent.putExtra("BUNDLE", args)
                 startActivity(intent)
                 finish()
-            } else if(it.itemId == 2131296674){
+            } else if(it.itemId == 2131296736){
                 val intent = Intent(this,BasketActivity::class.java)
                 val args: Bundle = Bundle()
                 args.putSerializable("map", basketList as Serializable)
                 intent.putExtra("BUNDLE", args)
                 startActivity(intent)
                 finish()
-            }else if(it.itemId == 2131296793){
+            }else if(it.itemId == 2131296678){
                 val intent = Intent(this,UserProfileActivity::class.java)
                 val args: Bundle = Bundle()
                 args.putSerializable("map", basketList as Serializable)

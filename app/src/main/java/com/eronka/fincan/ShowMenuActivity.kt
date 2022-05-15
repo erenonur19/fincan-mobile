@@ -62,8 +62,8 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         bottomNavigationView1.setOnItemSelectedListener {
             // homepage  2131296334
             // search    2131296339
-            // basket    2131296674
-            // profile   2131296793
+            // basket    2131296736
+            // profile   2131296678
             if(it.itemId == 2131296339){
                 val intent = Intent(this,SearchActivity::class.java)
                 val args: Bundle = Bundle()
@@ -72,14 +72,14 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
                 startActivity(intent)
                 finish()
             }
-            else if(it.itemId == 2131296674){
+            else if(it.itemId == 2131296736){
                 val intent = Intent(this,BasketActivity::class.java)
                 val args: Bundle = Bundle()
                 args.putSerializable("map", basketList as Serializable)
                 intent.putExtra("BUNDLE", args)
                 startActivity(intent)
                 finish()
-            }else if(it.itemId == 2131296793){
+            }else if(it.itemId == 2131296678){
                 val intent = Intent(this,UserProfileActivity::class.java)
                 val args: Bundle = Bundle()
                 args.putSerializable("map", basketList as Serializable)
@@ -148,7 +148,7 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         progressDialog = ProgressDialog(this)
         progressDialog.setCancelable(false)
         progressDialog.setTitle("Loading Menu...")
-        progressDialog.setMessage("For fast and smooth experience, you can download Menu for Offline.")
+        progressDialog.setMessage("For fast and smooth experience, please wait menu to be downloaded.")
         progressDialog.create()
         progressDialog.show()
 

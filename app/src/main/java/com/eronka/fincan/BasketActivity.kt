@@ -41,6 +41,7 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
     private var totalPrice: Float = 0F
     private var totalItems: Int = 0
     private var totalTax: Float = 0F
+    private var subTotal: Float = 0F
 
     override fun onBackPressed() {
         AlertDialog.Builder(this)
@@ -81,8 +82,8 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
         bottomNavigationView1.setOnItemSelectedListener {
             // homepage  2131296334
             // search    2131296339
-            // basket    2131296674
-            // profile   2131296793
+            // basket    2131296736
+            // profile   2131296678
             if(it.itemId==2131296334){
                 val intent = Intent(this,HomepageActivity::class.java)
                 val args: Bundle = Bundle()
@@ -98,7 +99,7 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
                 startActivity(intent)
                 finish()
             }
-            else if(it.itemId == 2131296793){
+            else if(it.itemId == 2131296678){
                 val intent = Intent(this,UserProfileActivity::class.java)
                 val args: Bundle = Bundle()
                 args.putSerializable("map", basketList as Serializable)
@@ -159,6 +160,7 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
         totalPriceTV.text = (((totalPrice* 100.0F).roundToInt() / 100.0F)).toString() + "₺"
         totalTaxTV.text = (((totalTax* 100.0F).roundToInt() / 100.0F)).toString() + "₺"
         subTotalTV.text = (((totalPrice + totalTax)* 100.0F).roundToInt() / 100.0F).toString() + "₺"
+        subTotal = totalPrice + totalTax
         if(totalItems == 0){
             totalPriceTV.text = "-"
             totalTaxTV.text = "-"
@@ -215,6 +217,15 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
             basketList.remove(item)
         }
         loadItems()
+
+    }
+    fun openPaymentActivity(view: View) {
+        val intent = Intent(this, PaymentActivity::class.java)
+        intent.putExtra("totalItemPrice", totalPrice)
+        intent.putExtra("totalTaxPrice", totalTax)
+        intent.putExtra("subTotalPrice", subTotal)
+        intent.putExtra("takeAwayTime", orderTakeAwayTV.text.toString())
+        startActivity(intent)
 
     }
 }

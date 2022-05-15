@@ -28,14 +28,18 @@ class UserProfileActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.profile_top_email_tv).text = user?.email.toString()
         findViewById<TextView>(R.id.profile_email).text = user?.email.toString()
 
-
+        val args = intent.getBundleExtra("BUNDLE")
+        basketList = (args!!.getSerializable("map") as MutableList<datamodels.MenuItem>?)!!
+        if (basketList == null){
+            basketList = mutableListOf()
+        }
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
         bottomNavigationView1.selectedItemId = 2131296793
         bottomNavigationView1.setOnItemSelectedListener {
             // homepage  2131296334
             // search    2131296339
-            // basket    2131296674
-            // profile   2131296793
+            // basket    2131296736
+            // profile   2131296678
             val args: Bundle = Bundle()
             if(it.itemId == 2131296339){
                 val intent = Intent(this,SearchActivity::class.java)
@@ -50,7 +54,7 @@ class UserProfileActivity : AppCompatActivity() {
                 startActivity(intent)
                 finish()
             }
-            else if(it.itemId == 2131296674){
+            else if(it.itemId == 2131296736){
                 val intent = Intent(this,BasketActivity::class.java)
                 args.putSerializable("map", basketList as Serializable)
                 intent.putExtra("BUNDLE", args)
