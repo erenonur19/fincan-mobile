@@ -2,11 +2,15 @@ package com.eronka.fincan
 
 import adapters.RecyclerMenuItemAdapter
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -18,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.squareup.picasso.Picasso
 import datamodels.CafeItem
 import datamodels.MenuItem
 import interfaces.ItemApi
@@ -35,6 +40,7 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
     private lateinit var recyclerItemAdapter: RecyclerMenuItemAdapter
     private lateinit var showAllSwitch: SwitchCompat
     var basketList = mutableListOf<MenuItem>()
+    lateinit var cafe : CafeItem
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         supportActionBar?.show()
@@ -48,6 +54,9 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         if (basketList == null){
             basketList = mutableListOf()
         }
+        cafe = (intent.getSerializableExtra("cafe") as? CafeItem)!!
+        cafeInfoLoader(cafe)
+
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
         bottomNavigationView1.selectedItemId = 2131296334
         bottomNavigationView1.setOnItemSelectedListener {
@@ -165,12 +174,46 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onPlusBtnClick(item: MenuItem) {
-        if (item.quantity == 0){
-            item.quantity = 1
-            basketList.add(item)
+        if (basketList.isEmpty()){
+            if (item.quantity == 0){
+                item.quantity = 1
+                basketList.add(item)
+            }else{
+                item.quantity += 1
+            }
         }else{
-            item.quantity += 1
+            if(basketList[0].cafeKey == item.cafeKey){
+                var bool = false
+                basketList.forEach(){
+                    if(it.itemName == item.itemName){
+                        it.quantity += 1
+                        item.quantity = it.quantity
+                        bool = true
+                    }
+                }
+                if (!bool){
+                    item.quantity = 1
+                    basketList.add(item)
+                }
+
+            }else{
+                AlertDialog.Builder(this)
+                    .setIcon(R.drawable.ic_alert)
+                    .setTitle("Alert!")
+                    .setMessage("You have already have item in your basket from another cafe.\nDo you want to clear your basket ?")
+                    .setPositiveButton("Yes", DialogInterface.OnClickListener { _, _ ->
+                        basketList.clear()
+                        item.quantity = 1
+                        basketList.add(item)
+                        itemRecyclerView.adapter!!.notifyDataSetChanged()
+                    })
+                    .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, _ ->
+                        dialogInterface.dismiss()
+                    })
+                    .create().show()
+            }
         }
+
         itemRecyclerView.adapter!!.notifyDataSetChanged()
         //Toast.makeText(this,"plus " + item.itemName,Toast.LENGTH_SHORT).show()
 
@@ -186,6 +229,20 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         }
         itemRecyclerView.adapter!!.notifyDataSetChanged()
 
+    }
+
+    fun cafeInfoLoader(cafeItem: CafeItem){
+        val cafeImage: ImageView = findViewById(R.id.item_image)
+        val cafeName: TextView = findViewById(R.id.item_name)
+        val cafeStars: TextView = findViewById(R.id.item_stars)
+        val cafeAddress: TextView = findViewById(R.id.list_cafes_item)
+
+        if (cafeItem.imageUrl != null && cafeItem.imageUrl != ""){
+            Picasso.get().load(cafeItem.imageUrl).into(cafeImage)
+        }
+        cafeName.text = cafeItem.cafeName
+        cafeStars.text = cafeItem.cafeStars.toString()
+        cafeAddress.text = cafeItem.cafeAddress
     }
 
 

@@ -265,7 +265,8 @@
                 android:backgroundTint="@color/purple_theme_color"
                 android:width="150dp"
                 android:onClick="logOut"
-                android:text="@string/log_out">
+                android:text="@string/log_out"
+                android:textColor="@color/white">
 
             </Button>
         </LinearLayout>
@@ -286,6 +287,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+
                 app:itemBackground="@color/purple_theme_color"
                 app:itemIconTint="@drawable/selector"
                 app:itemTextColor="@drawable/selector"

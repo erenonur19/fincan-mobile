@@ -30,7 +30,7 @@ class FirebaseDBService {
                 )
                 menuList.add(item)
             }
-            menuList.shuffle() //so that every time user can see different items on opening app
+
             menuApi.onFetchSuccessListener(menuList)
         }
     }
@@ -50,7 +50,6 @@ class FirebaseDBService {
                 )
                 itemList.add(item)
             }
-            itemList.shuffle() //so that every time user can see different items on opening app
             itemApi.onFetchSuccessListener(itemList)
         }
     }

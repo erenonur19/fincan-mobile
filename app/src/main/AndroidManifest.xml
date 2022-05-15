@@ -13,9 +13,6 @@
             android:name=".ContactUsActivity"
             android:exported="false" />
         <activity
-            android:name=".ContactUs"
-            android:exported="false" />
-        <activity
             android:name=".BasketActivity"
             android:exported="false" />
         <activity

@@ -1,5 +1,6 @@
 package com.eronka.fincan
 
+import adapters.RecyclerBasketItemAdapter
 import adapters.RecyclerCafeItemAdapter
 import adapters.RecyclerMenuItemAdapter
 import android.annotation.SuppressLint
@@ -24,11 +25,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
 
-class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, RecyclerMenuItemAdapter.OnItemClickListener  {
+class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, RecyclerBasketItemAdapter.OnItemClickListener  {
 
     private lateinit var itemRecyclerView: RecyclerView
-    private lateinit var recyclerAdapter: RecyclerMenuItemAdapter
-    var basketList = arrayListOf<datamodels.MenuItem>()
+    private lateinit var recyclerAdapter: RecyclerBasketItemAdapter
+    var basketList = mutableListOf<datamodels.MenuItem>()
 
     private lateinit var totalItemsTV: TextView
     private lateinit var totalPriceTV: TextView
@@ -63,11 +64,11 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
         setContentView(R.layout.activity_basket)
         itemRecyclerView = findViewById(R.id.order_recycler_view)
         val args = intent.getBundleExtra("BUNDLE")
-        basketList = (args!!.getSerializable("map") as ArrayList<datamodels.MenuItem>?)!!
+        basketList = (args!!.getSerializable("map") as MutableList<datamodels.MenuItem>?)!!
         if (basketList == null){
-            basketList = arrayListOf()
+            basketList = mutableListOf()
         }
-        recyclerAdapter = RecyclerMenuItemAdapter(
+        recyclerAdapter = RecyclerBasketItemAdapter(
             applicationContext,
             basketList,
             sharedPref.getInt("loadItemImages", 0),
@@ -135,7 +136,7 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
         val sharedPref: SharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
 
         itemRecyclerView = findViewById(R.id.order_recycler_view)
-        recyclerAdapter = RecyclerMenuItemAdapter(
+        recyclerAdapter = RecyclerBasketItemAdapter(
             applicationContext,
             basketList,
             sharedPref.getInt("loadItemImages", 0),
@@ -210,6 +211,8 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
     override fun onMinusBtnClick(item: datamodels.MenuItem) {
         if (item.quantity != 0){
             item.quantity -= 1
+        }else{
+            basketList.remove(item)
         }
         loadItems()
 

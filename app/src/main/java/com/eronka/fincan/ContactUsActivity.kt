@@ -26,7 +26,7 @@ class ContactUsActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportActionBar?.show()
+        supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         setContentView(com.eronka.fincan.R.layout.activity_contact_us)
 

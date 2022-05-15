@@ -2,7 +2,7 @@
     <string name="app_name">Fincan</string>
     <string name="app_version_number">1.0.0</string>
 
-    <string name="food_categories">Food Categories</string>
+    <string name="food_categories" translatable="true">Food Categories</string>
     <string name="fruits">Fruits</string>
     <string name="cake">Cake</string>
     <string name="pizza">Pizza</string>
