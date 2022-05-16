@@ -105,16 +105,6 @@
                 app:menu="@menu/menu2">
 
             </com.google.android.material.bottomnavigation.BottomNavigationView>
-
         </LinearLayout>
-
-
-
     </LinearLayout>
-
-
-
-
-
-
 </androidx.drawerlayout.widget.DrawerLayout>

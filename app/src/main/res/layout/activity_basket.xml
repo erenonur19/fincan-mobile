@@ -18,16 +18,6 @@
         tools:ignore="MissingConstraints">
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:onClick="goBack"
-            android:rotation="-90"
-            android:src="@drawable/ic_arrow_upward"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/text_dark_color" />
-
-        <ImageView
             android:id="@+id/user_menu_order_help_iv"
             android:layout_width="30dp"
             android:layout_height="30dp"

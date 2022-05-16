@@ -21,25 +21,21 @@ class SearchActivity : AppCompatActivity() {
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
         bottomNavigationView1.selectedItemId = 2131296339
         bottomNavigationView1.setOnItemSelectedListener {
-            // homepage  2131296334
-            // search    2131296339
-            // basket    2131296736
-            // profile   2131296678
-            if(it.itemId==2131296334){
+            if(it.itemId==R.id.anasayfa){
                 val intent = Intent(this,HomepageActivity::class.java)
                 val args: Bundle = Bundle()
                 args.putSerializable("map", basketList as Serializable)
                 intent.putExtra("BUNDLE", args)
                 startActivity(intent)
                 finish()
-            } else if(it.itemId == 2131296736){
+            } else if(it.itemId == R.id.sepet){
                 val intent = Intent(this,BasketActivity::class.java)
                 val args: Bundle = Bundle()
                 args.putSerializable("map", basketList as Serializable)
                 intent.putExtra("BUNDLE", args)
                 startActivity(intent)
                 finish()
-            }else if(it.itemId == 2131296678){
+            }else if(it.itemId == R.id.profile){
                 val intent = Intent(this,UserProfileActivity::class.java)
                 val args: Bundle = Bundle()
                 args.putSerializable("map", basketList as Serializable)
