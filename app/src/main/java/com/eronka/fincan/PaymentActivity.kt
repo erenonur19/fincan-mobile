@@ -12,6 +12,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.io.Serializable
 
 
 class PaymentActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class PaymentActivity : AppCompatActivity() {
     private lateinit var bhimUpiSection: LinearLayout
 
     private lateinit var allWalletsLL: LinearLayout
-
+    var basketList = mutableListOf<datamodels.MenuItem>()
     var totalItemPrice = 0.0F
     var totalTaxPrice = 0.0F
     var subTotalPrice = 0.0F
@@ -67,6 +68,13 @@ class PaymentActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_payment)
         supportActionBar?.hide()
+
+        val args = intent.getBundleExtra("BUNDLE")
+        basketList = (args!!.getSerializable("map") as MutableList<datamodels.MenuItem>?)!!
+        if (basketList == null){
+            basketList = mutableListOf()
+        }
+
         totalItemPrice = intent.getFloatExtra("totalItemPrice", 0.0F)
         totalTaxPrice = intent.getFloatExtra("totalTaxPrice", 0.0F)
         subTotalPrice = intent.getFloatExtra("subTotalPrice", 0.0F)
@@ -210,6 +218,9 @@ class PaymentActivity : AppCompatActivity() {
         intent.putExtra("subTotalPrice", subTotalPrice)
         intent.putExtra("takeAwayTime", takeAwayTime)
         intent.putExtra("paymentMethod", paymentMethod)
+        val args: Bundle = Bundle()
+        args.putSerializable("map", basketList as Serializable)
+        intent.putExtra("BUNDLE", args)
 
         startActivity(intent)
         finish()

@@ -1,5 +1,6 @@
 package services
 
+import android.view.Menu
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
@@ -10,6 +11,8 @@ import datamodels.CafeItem
 import datamodels.MenuItem
 import interfaces.CafeApi
 import interfaces.ItemApi
+import java.util.*
+import kotlin.collections.ArrayList
 
 class FirebaseDBService {
     private var databaseRef: FirebaseFirestore = FirebaseFirestore.getInstance()
@@ -52,6 +55,21 @@ class FirebaseDBService {
             }
             itemApi.onFetchSuccessListener(itemList)
         }
+    }
+
+    fun pushOrder(basket: MutableList<MenuItem>, orderId: String, paymentMethod: String, subtotalPrice: Float, time: String){
+
+        var myMap = mapOf<String, Any>(
+            "orderId" to orderId,
+            "paymentMethod" to paymentMethod,
+            "subtotalPrice" to subtotalPrice,
+            "time" to time,
+            "restaurantId" to basket[0].cafeKey,
+            "watch" to "Pending",
+            "items" to basket
+        )
+
+        databaseRef.collection("orders").add(myMap)
     }
 
 }

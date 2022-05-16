@@ -1,5 +1,6 @@
 package com.eronka.fincan
 
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.ktx.Firebase
+import services.FirebaseDBService
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,7 +19,7 @@ class OrderDoneActivity : AppCompatActivity() {
 
     private lateinit var completeLL: LinearLayout
     private lateinit var processingLL: LinearLayout
-
+    var basketList = mutableListOf<datamodels.MenuItem>()
     private lateinit var orderStatusTV: TextView
     private lateinit var orderIDTV: TextView
     private lateinit var dateAndTimeTV: TextView
@@ -38,6 +41,7 @@ class OrderDoneActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order_done)
@@ -56,6 +60,13 @@ class OrderDoneActivity : AppCompatActivity() {
 
         paymentMethod = intent?.getStringExtra("paymentMethod").toString()
         takeAwayTime = intent?.getStringExtra("takeAwayTime").toString()
+
+
+        val args = intent.getBundleExtra("BUNDLE")
+        basketList = (args!!.getSerializable("map") as MutableList<datamodels.MenuItem>?)!!
+        if (basketList == null){
+            basketList = mutableListOf()
+        }
 
 
         findViewById<TextView>(R.id.order_done_total_amount_tv).text = "%.2f".format(subTotalPrice)
@@ -103,26 +114,16 @@ class OrderDoneActivity : AppCompatActivity() {
     }
 
     private fun saveOrderRecordToDatabase() {
-        //val item = OrderHistoryItem(orderDate, orderID, "Order Successful", paymentMethod, "\$%.2f".format(subTotalPrice))
-        //val db = DatabaseHandler(this)
-        //db.insertOrderData(item)
-        //
-        //saveCurrentOrderToDatabase()
-    }
+        basketList.forEach{
+            println(it.itemName + it.quantity)
+        }
+        orderDate
+        orderID
+        paymentMethod
+        subTotalPrice
+        var service = FirebaseDBService()
+        service.pushOrder(basketList,orderID,paymentMethod,subTotalPrice,orderDate)
 
-    private fun saveCurrentOrderToDatabase() {
-        //val item = CurrentOrderItem(
-        //    orderID,
-        //    takeAwayTime,
-        //    if(paymentMethod.startsWith("Pending")) "Pending" else "Done",
-        //    getOrderItemNames(),
-        //    getOrderItemQty(),
-        //    totalItemPrice.toString(),
-        //    totalTaxPrice.toString(),
-        //    subTotalPrice.toString()
-        //)
-        //val db = DatabaseHandler(this)
-        //db.insertCurrentOrdersData(item)
     }
 
 

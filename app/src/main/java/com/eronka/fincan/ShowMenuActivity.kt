@@ -48,7 +48,6 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         setContentView(R.layout.activity_show_menu)
         auth= FirebaseAuth.getInstance()
         database = Firebase.database.reference
-        loadItems()
         val args = intent.getBundleExtra("BUNDLE")
         basketList = (args!!.getSerializable("map") as MutableList<MenuItem>?)!!
         if (basketList == null){
@@ -56,7 +55,7 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         }
         cafe = (intent.getSerializableExtra("cafe") as? CafeItem)!!
         cafeInfoLoader(cafe)
-
+        loadItems()
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
         bottomNavigationView1.selectedItemId = 2131296334
         bottomNavigationView1.setOnItemSelectedListener {
@@ -135,7 +134,8 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
             applicationContext,
             tempItems,
             sharedPref.getInt("loadItemImages", 0),
-            this
+            this,
+            basketList
         )
         itemRecyclerView.adapter = recyclerItemAdapter
         itemRecyclerView.layoutManager = LinearLayoutManager(this@ShowMenuActivity)
@@ -244,6 +244,4 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         cafeStars.text = cafeItem.cafeStars.toString()
         cafeAddress.text = cafeItem.cafeAddress
     }
-
-
 }

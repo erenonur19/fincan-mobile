@@ -21,7 +21,8 @@ class RecyclerMenuItemAdapter(
     context: Context,
     private var itemList: ArrayList<MenuItem>,
     private val loadDefaultImage: Int,
-    val listener: OnItemClickListener
+    val listener: OnItemClickListener,
+    private var basketList: MutableList<MenuItem>
 ) : RecyclerView.Adapter<RecyclerMenuItemAdapter.ItemListViewHolder>(), Filterable {
 
     private var fullMenuList = ArrayList<MenuItem>(itemList)
@@ -55,6 +56,15 @@ class RecyclerMenuItemAdapter(
         if (currentItem.imageUrl != null && currentItem.imageUrl != ""){
             Picasso.get().load(currentItem.imageUrl).into(holder.itemImage)
         }
+        if (basketList.size > 0){
+            if (currentItem.cafeKey == basketList[0].cafeKey){
+                basketList.forEach{
+                    if (currentItem.itemName == it.itemName){
+                        currentItem.quantity = it.quantity
+                    }
+                }
+            }
+        }
 
         holder.itemName.text = currentItem.itemName
         holder.itemStars.text = currentItem.itemStars.toString()
@@ -87,6 +97,17 @@ class RecyclerMenuItemAdapter(
 
     fun filterList(filteredList: ArrayList<MenuItem>) {
         itemList = filteredList
+        if (itemList.size > 0 && basketList.size > 0){
+            if (itemList[0].itemName == basketList[0].itemName){
+                itemList.forEach {
+                    for (item in basketList){
+                        if(it.itemName == item.itemName){
+                            it.quantity = item.quantity
+                        }
+                    }
+                }
+            }
+        }
         notifyDataSetChanged()
     }
 
@@ -101,7 +122,6 @@ class RecyclerMenuItemAdapter(
                 filteredList.addAll(fullMenuList)
             } else {
                 val filterPattern = constraint.toString().lowercase(Locale.ROOT).trim()
-
                 for (item in fullMenuList) {
                     if (item.itemName.toLowerCase(Locale.ROOT).contains(filterPattern)) {
                         filteredList.add(item)

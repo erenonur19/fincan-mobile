@@ -15,6 +15,7 @@ import java.io.Serializable
 lateinit var bottomNavigationView1: BottomNavigationView
 var basketList = mutableListOf<datamodels.MenuItem>()
 private lateinit var auth: FirebaseAuth
+
 class UserProfileActivity : AppCompatActivity() {
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +35,7 @@ class UserProfileActivity : AppCompatActivity() {
             basketList = mutableListOf()
         }
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
-        bottomNavigationView1.selectedItemId = 2131296793
+        bottomNavigationView1.selectedItemId = 2131296678
         bottomNavigationView1.setOnItemSelectedListener {
             // homepage  2131296334
             // search    2131296339

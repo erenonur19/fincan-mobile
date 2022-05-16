@@ -57,7 +57,6 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
 
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
         bottomNavigationView1.setOnItemSelectedListener {
-            println(it.itemId)
             // homepage  2131296334
             // search    2131296339
             // basket    2131296736

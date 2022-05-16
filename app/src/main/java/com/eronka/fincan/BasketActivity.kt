@@ -78,7 +78,7 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
 
 
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
-        bottomNavigationView1.selectedItemId = 2131296674
+        bottomNavigationView1.selectedItemId = 2131296736
         bottomNavigationView1.setOnItemSelectedListener {
             // homepage  2131296334
             // search    2131296339
@@ -225,6 +225,9 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
         intent.putExtra("totalTaxPrice", totalTax)
         intent.putExtra("subTotalPrice", subTotal)
         intent.putExtra("takeAwayTime", orderTakeAwayTV.text.toString())
+        val args: Bundle = Bundle()
+        args.putSerializable("map", basketList as Serializable)
+        intent.putExtra("BUNDLE", args)
         startActivity(intent)
 
     }
