@@ -145,4 +145,5 @@
     <string name="search">Search..</string>
     <string name="cafe_name">Cafe name</string>
     <string name="e_mail">E-mail</string>
+    <string name="your_past_orders">Your past orders:</string>
 </resources>

@@ -149,6 +149,18 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
         FirebaseDBService().readAllCafe(this)
     }
 
+    @SuppressLint("SetTextI18n")
+    override fun onFetchSuccessListener(list: ArrayList<CafeItem>) {
+        for (item in list) {
+            allItems.add(item)
+        }
+        tempItems.addAll(allItems)
+        recyclerFoodAdapter.notifyItemRangeInserted(0, tempItems.size)
+
+        progressDialog.dismiss()
+        restaurant_sayisi.text= "${tempItems.size} cafe listed!"
+    }
+
     override fun onItemClick(item: CafeItem) {
         val intent = Intent(this,ShowMenuActivity::class.java)
         intent.putExtra("cafekey",item.cafeKey)
@@ -161,15 +173,5 @@ class HomepageActivity : AppCompatActivity(),  RecyclerCafeItemAdapter.OnItemCli
         finish()
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun onFetchSuccessListener(list: ArrayList<CafeItem>) {
-        for (item in list) {
-            allItems.add(item)
-        }
-        tempItems.addAll(allItems)
-        recyclerFoodAdapter.notifyItemRangeInserted(0, tempItems.size)
 
-        progressDialog.dismiss()
-        restaurant_sayisi.text= "${tempItems.size} cafe listed!"
-    }
 }

@@ -6,7 +6,7 @@
        ></item>
     <item android:id="@+id/arama"
         android:title="Arama"
-        android:icon="@drawable/ic_search"></item>
+        android:icon="@drawable/ic_order_history"></item>
     <item android:id="@+id/sepet"
         android:title="Sepet"
         android:icon="@drawable/ic_basket"></item>

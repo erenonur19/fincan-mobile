@@ -1,17 +1,13 @@
 package services
 
-import android.view.Menu
-import com.google.android.gms.tasks.Tasks
-import com.google.firebase.database.*
-import com.google.firebase.database.ktx.database
-import com.google.firebase.firestore.CollectionReference
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import datamodels.CafeItem
 import datamodels.MenuItem
+import datamodels.OrderItem
 import interfaces.CafeApi
 import interfaces.ItemApi
-import java.util.*
+import interfaces.OrderApi
 import kotlin.collections.ArrayList
 
 class FirebaseDBService {
@@ -57,8 +53,50 @@ class FirebaseDBService {
         }
     }
 
-    fun pushOrder(basket: MutableList<MenuItem>, orderId: String, paymentMethod: String, subtotalPrice: Float, time: String){
+    fun readAllOrder(orderApi: OrderApi){
+        val orderList1 = ArrayList<OrderItem>()
+        val orderList2 = ArrayList<OrderItem>()
+        databaseRef.collection("orders").get().addOnSuccessListener {
+            for(a in it.documents){
+                if (a["email"]?.equals(FirebaseAuth.getInstance().currentUser!!.email.toString()) == true){
+                    var order = OrderItem(
+                        status = a["watch"] as String,
+                        subtotalPrice = (a["subtotalPrice"] as Double).toFloat(),
+                        paymentMethod = a["paymentMethod"] as String,
+                        orderId = a["orderId"] as String,
+                        items = a["items"] as ArrayList<Map<Any,Any>>,
+                        time = a["time"] as String
+                    )
+                    orderList1.add(order)
+                }
+            }
+                databaseRef.collection("resturant").get().addOnSuccessListener {
+                    for (order in orderList1){
+                        for(a in it.documents){
+                            if(a["restaurantkey"] as String == order.items[0]["cafeKey"] as String){
+                                var newOrder = OrderItem(
+                                    status = order.status,
+                                    subtotalPrice = order.subtotalPrice,
+                                    paymentMethod = order.paymentMethod,
+                                    orderId = order.orderId,
+                                    items = order.items,
+                                    time = order.time,
+                                    cafeName = a["name"] as String,
+                                    cafeImageUrl = a["imageurl"] as String,
+                                )
+                                orderList2.add(newOrder)
+                            }
+                        }
 
+                }
+                orderApi.onFetchSuccessListener(orderList2)
+            }
+        }
+    }
+
+
+    fun pushOrder(basket: MutableList<MenuItem>, orderId: String, paymentMethod: String, subtotalPrice: Float, time: String){
+        val auth = FirebaseAuth.getInstance().currentUser!!
         var myMap = mapOf<String, Any>(
             "orderId" to orderId,
             "paymentMethod" to paymentMethod,
@@ -66,10 +104,13 @@ class FirebaseDBService {
             "time" to time,
             "restaurantId" to basket[0].cafeKey,
             "watch" to "Pending",
-            "items" to basket
+            "items" to basket,
+            "email" to auth.email.toString()
         )
 
         databaseRef.collection("orders").add(myMap)
     }
+
+
 
 }

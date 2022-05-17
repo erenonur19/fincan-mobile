@@ -112,9 +112,6 @@ class OrderDoneActivity : AppCompatActivity() {
     }
 
     private fun saveOrderRecordToDatabase() {
-        basketList.forEach{
-            println(it.itemName + it.quantity)
-        }
         orderDate
         orderID
         paymentMethod
@@ -155,27 +152,5 @@ class OrderDoneActivity : AppCompatActivity() {
 
     private fun contactUs() {
         startActivity(Intent(this, ContactUsActivity::class.java))
-    }
-
-    fun openMainActivity(view: View) {onBackPressed()}
-
-    private fun getOrderItemNames(): String {
-        ////stores all the item names in a single string separated by (;)
-        //var itemNames = ""
-        //for(item in DatabaseHandler(this).readCartData()) {
-        //    itemNames += item.itemName + ";"
-        //}
-        //return itemNames.substring(0, itemNames.length-1)
-        return " "
-    }
-
-    private fun getOrderItemQty(): String {
-        ////stores all the item qty in a single string separated by (;)
-        //var itemQty = ""
-        //for(item in DatabaseHandler(this).readCartData()) {
-        //    itemQty += item.quantity.toString() + ";"
-        //}
-        //return itemQty.substring(0, itemQty.length-1)
-        return " "
     }
 }
