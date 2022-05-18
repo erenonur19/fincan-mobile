@@ -1,8 +1,6 @@
 package com.eronka.fincan
 
 import adapters.RecyclerBasketItemAdapter
-import adapters.RecyclerCafeItemAdapter
-import adapters.RecyclerMenuItemAdapter
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.TimePickerDialog
@@ -11,8 +9,6 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -78,7 +74,7 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
 
 
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
-        bottomNavigationView1.selectedItemId = 2131296736
+        bottomNavigationView1.selectedItemId = R.id.sepet
         bottomNavigationView1.setOnItemSelectedListener {
             // homepage  2131296334
             // search    2131296339

@@ -3,17 +3,8 @@
     <string name="app_version_number">1.0.0</string>
 
     <string name="food_categories" translatable="true">Food Categories</string>
-    <string name="fruits">Fruits</string>
-    <string name="cake">Cake</string>
-    <string name="pizza">Pizza</string>
-    <string name="soup">Soup</string>
-    <string name="snacks">Snacks</string>
-    <string name="cookies">Cookies</string>
+
     <string name="menu_icon">Menu Icon</string>
-    <string name="cold_drink">Cold drinks</string>
-    <string name="here_s_what_i_found_for_you">Here\'s what I found for you</string>
-    <string name="show_all">Show all</string>
-    <string name="noodles">Noodles</string>
     <string name="short_item_description">Short Item Description</string>
     <string name="item_name">Item Name</string>
     <string name="default_price">$0.00</string>
@@ -38,15 +29,8 @@
     <string name="employee_id">Employee ID</string>
     <string name="employee_id_card">Employee ID Card</string>
     <string name="upload">Upload</string>
-    <string name="i_agree_to_the_terms_conditions"><![CDATA[I agree to the Terms & Conditions]]></string>
-    <string name="preview">Preview</string>
     <string name="register">Register</string>
-    <string name="preview_details">Preview Details</string>
-    <string name="gender">Gender</string>
-    <string name="select_your_gender">Select your Gender</string>
     <string name="save">Save</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
     <string name="hi">Hi</string>
     <string name="name">Name</string>
     <string name="your_id_card">Your ID Card</string>
@@ -134,8 +118,6 @@
     <string name="have_a_problem">HAVE A PROBLEM !</string>
     <string name="call">Call</string>
     <string name="mail">Mail</string>
-    <string name="thali">Thali</string>
-    <string name="xxx">XXX</string>
     <string name="default_card_number">2334 xxxx xxxx 6335</string>
     <string name="default_date">09/23</string>
     <string name="hello">Hello!</string>

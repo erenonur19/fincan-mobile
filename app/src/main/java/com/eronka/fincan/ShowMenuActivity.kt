@@ -17,7 +17,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -59,7 +58,7 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
         cafeInfoLoader(cafe)
         loadItems()
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
-        bottomNavigationView1.selectedItemId = 2131296334
+        bottomNavigationView1.selectedItemId = R.id.anasayfa
         bottomNavigationView1.setOnItemSelectedListener {
             if(it.itemId == R.id.arama){
                 val intent = Intent(this,SearchActivity::class.java)

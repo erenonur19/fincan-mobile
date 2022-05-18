@@ -4,10 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import java.io.Serializable
@@ -35,7 +33,7 @@ class UserProfileActivity : AppCompatActivity() {
             basketList = mutableListOf()
         }
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
-        bottomNavigationView1.selectedItemId = 2131296678
+        bottomNavigationView1.selectedItemId = R.id.profile
         bottomNavigationView1.setOnItemSelectedListener {
             // homepage  2131296334
             // search    2131296339

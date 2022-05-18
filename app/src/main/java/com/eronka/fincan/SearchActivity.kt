@@ -1,15 +1,12 @@
 package com.eronka.fincan
 
-import adapters.RecyclerCafeItemAdapter
 import adapters.RecyclerOrderItemAdapter
-import adapters.RecyclerOrderItemItemAdapter
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -52,7 +49,7 @@ class SearchActivity : AppCompatActivity(), OrderApi {
         loadMenu()
 
         bottomNavigationView1=findViewById(R.id.bottom_navigator)
-        bottomNavigationView1.selectedItemId = 2131296339
+        bottomNavigationView1.selectedItemId = R.id.arama
         bottomNavigationView1.setOnItemSelectedListener {
             if(it.itemId==R.id.anasayfa){
                 val intent = Intent(this,HomepageActivity::class.java)

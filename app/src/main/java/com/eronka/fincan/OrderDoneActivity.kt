@@ -6,11 +6,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import com.google.firebase.ktx.Firebase
 import services.FirebaseDBService
 import java.text.SimpleDateFormat
 import java.util.*

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/anasayfa"
-        android:title="Anasayfa"
+        android:title="Homepage"
         android:icon="@drawable/ic_homepage"
        ></item>
     <item android:id="@+id/arama"
-        android:title="Arama"
+        android:title="Past Orders"
         android:icon="@drawable/ic_order_history"></item>
     <item android:id="@+id/sepet"
-        android:title="Sepet"
+        android:title="Basket"
         android:icon="@drawable/ic_basket"></item>
     <item android:id="@+id/profile"
         android:title="Profile"
