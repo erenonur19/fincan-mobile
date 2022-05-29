@@ -56,13 +56,16 @@
                     android:transitionName="itemNameTransition" />
 
                 <TextView
-                    android:id="@+id/item_date"
-                    android:textSize="11dp"
+                    android:id="@+id/order_status"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/date"
+                    android:layout_height="wrap_content"
+                    android:text="@string/order_status"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:ignore="MissingConstraints"></TextView>
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -111,6 +114,15 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+            <TextView
+                android:id="@+id/item_date"
+                android:textSize="11dp"
+                android:paddingTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/date"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints"></TextView>
 
         </LinearLayout>
 

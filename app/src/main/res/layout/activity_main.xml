@@ -11,8 +11,8 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hoşgeldiniz"
-        android:textColor="#000000"
+        android:text="Welcome"
+        android:textColor="#107cf1"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +30,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:gravity="center"
-        android:text="Uygulamayı Kullanmak İçin Giriş Yapmalısınız"
+        android:text="You have to login tou use the app"
         android:textColor="#302E2E"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,10 +58,10 @@
             android:layout_marginStart="4dp"
             android:layout_marginEnd="1dp"
             android:layout_marginBottom="1dp"
-
             android:onClick="register"
             android:padding="18dp"
             android:text="Sign Up"
+            android:textColor="@color/white"
             android:backgroundTint="@color/purple_theme_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,14 +106,15 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="353dp"
-        android:layout_height="315dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
+        android:layout_width="950dp"
+        android:layout_height="750dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.33"
-        app:srcCompat="@drawable/cofee" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/fincan"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

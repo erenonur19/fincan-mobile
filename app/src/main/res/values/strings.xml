@@ -20,7 +20,7 @@
     <string name="change_time">Change Time</string>
     <string name="proceed_to_pay">Proceed to Pay</string>
     <string name="create_account">Create Account</string>
-    <string name="enjoy_your_meal">Enjoy Your Meal</string>
+    <string name="enjoy_your_meal">Enjoy Your Coffee</string>
     <string name="full_name">Full Name</string>
     <string name="company_organization">Company / Organization</string>
     <string name="mobile_number">Mobile Number</string>
@@ -128,4 +128,5 @@
     <string name="cafe_name">Cafe name</string>
     <string name="e_mail">E-mail</string>
     <string name="your_past_orders">Your past orders:</string>
+    <string name="order_status">Order Status</string>
 </resources>

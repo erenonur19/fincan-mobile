@@ -48,6 +48,7 @@ class RecyclerOrderItemAdapter(
                 holder.orders.adapter = adapter
                 holder.orders.layoutManager = LinearLayoutManager(holder.orders.context)
                 holder.orders.setRecycledViewPool(pool)
+                holder.status.text = currentItem.status
                 adapter.filterList(items)
                 holder.subtotal.text = ((currentItem.subtotalPrice * 100).roundToInt() / 100).toString()
         }
@@ -65,6 +66,7 @@ class OrderListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date: TextView = itemView.findViewById(R.id.item_date)
         val orders: RecyclerView = itemView.findViewById(R.id.order_items_prices)
         val subtotal : TextView = itemView.findViewById(R.id.order_subtotal_price)
+        val status : TextView = itemView.findViewById(R.id.order_status)
         }
 
 }
