@@ -218,6 +218,12 @@ class PaymentActivity : AppCompatActivity() {
         intent.putExtra("takeAwayTime", takeAwayTime)
         intent.putExtra("paymentMethod", paymentMethod)
         val args: Bundle = Bundle()
+
+        for(item in basketList.reversed()){
+            if (item.quantity == 0){
+                basketList.remove(item)
+            }
+        }
         args.putSerializable("map", basketList as Serializable)
         intent.putExtra("BUNDLE", args)
 

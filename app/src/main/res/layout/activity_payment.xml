@@ -471,11 +471,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="15dp"
+                    android:textColor="@color/white"
                     android:text="@string/pay"/>
 
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:visibility="gone"
                 android:onClick="chooseModeOfPayment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -565,11 +567,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:padding="15dp"
+                    android:textColor="@color/white"
                     android:text="@string/pay"/>
 
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
+                android:visibility="gone"
                 android:onClick="chooseModeOfPayment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -619,6 +623,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:padding="15dp"
+                android:textColor="@color/white"
                 android:text="@string/confirm_payment"/>
 
         </LinearLayout>

@@ -8,6 +8,7 @@ import datamodels.OrderItem
 import interfaces.CafeApi
 import interfaces.ItemApi
 import interfaces.OrderApi
+import java.util.*
 import kotlin.collections.ArrayList
 
 class FirebaseDBService {
@@ -17,7 +18,7 @@ class FirebaseDBService {
     fun readAllCafe(menuApi: CafeApi) {
         val menuList = ArrayList<CafeItem>()
 
-        databaseRef.collection("resturant").get().addOnSuccessListener {
+        databaseRef.collection("caffee").get().addOnSuccessListener {
             for(a in it.documents){
                 val item = CafeItem(
                     email = a["email"].toString(),
@@ -70,7 +71,7 @@ class FirebaseDBService {
                     orderList1.add(order)
                 }
             }
-                databaseRef.collection("resturant").get().addOnSuccessListener {
+                databaseRef.collection("caffee").get().addOnSuccessListener {
                     for (order in orderList1){
                         for(a in it.documents){
                             if(a["restaurantkey"] as String == order.items[0]["cafeKey"] as String){
@@ -84,11 +85,13 @@ class FirebaseDBService {
                                     cafeName = a["name"] as String,
                                     cafeImageUrl = a["imageurl"] as String,
                                 )
+
                                 orderList2.add(newOrder)
                             }
                         }
-
                 }
+                orderList2.sort()
+
                 orderApi.onFetchSuccessListener(orderList2)
             }
         }

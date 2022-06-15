@@ -67,16 +67,6 @@
                     tools:ignore="MissingClass" />
 
                 <TextView
-                    android:id="@+id/profile_top_name_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/montserrat_semi_bold"
-                    android:text="@string/name"
-                    android:textColor="@color/purple_theme_color"
-                    android:textSize="16sp" />
-
-                <TextView
                     android:id="@+id/profile_top_email_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

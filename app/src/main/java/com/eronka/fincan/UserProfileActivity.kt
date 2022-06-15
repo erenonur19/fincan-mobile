@@ -23,7 +23,6 @@ class UserProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user_profile)
         val auth = FirebaseAuth.getInstance()
         val user = auth?.currentUser
-        findViewById<TextView>(R.id.profile_top_name_tv).text = user?.displayName.toString()
         findViewById<TextView>(R.id.profile_top_email_tv).text = user?.email.toString()
         findViewById<TextView>(R.id.profile_email).text = user?.email.toString()
 

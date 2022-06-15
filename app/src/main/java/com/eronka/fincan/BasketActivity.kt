@@ -216,15 +216,30 @@ class BasketActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, 
 
     }
     fun openPaymentActivity(view: View) {
-        val intent = Intent(this, PaymentActivity::class.java)
-        intent.putExtra("totalItemPrice", totalPrice)
-        intent.putExtra("totalTaxPrice", totalTax)
-        intent.putExtra("subTotalPrice", subTotal)
-        intent.putExtra("takeAwayTime", orderTakeAwayTV.text.toString())
-        val args: Bundle = Bundle()
-        args.putSerializable("map", basketList as Serializable)
-        intent.putExtra("BUNDLE", args)
-        startActivity(intent)
+        var itemCount: Int = 0
+        for(item in basketList) {
+            itemCount += item.quantity
+        }
+        if (itemCount > 0){
+            val intent = Intent(this, PaymentActivity::class.java)
+            intent.putExtra("totalItemPrice", totalPrice)
+            intent.putExtra("totalTaxPrice", totalTax)
+            intent.putExtra("subTotalPrice", subTotal)
+            intent.putExtra("takeAwayTime", orderTakeAwayTV.text.toString())
+            val args: Bundle = Bundle()
+            args.putSerializable("map", basketList as Serializable)
+            intent.putExtra("BUNDLE", args)
+            startActivity(intent)
+        }else{
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Empty Basket!")
+            builder.setMessage("You must add item to your basket!")
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+            }
+
+            builder.show()
+        }
+
 
     }
 }

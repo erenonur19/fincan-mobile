@@ -182,7 +182,7 @@ class ShowMenuActivity : AppCompatActivity(),  RecyclerMenuItemAdapter.OnItemCli
     }
 
     override fun onItemClick(item: MenuItem) {
-        Toast.makeText(this,"${item.cafeKey}",Toast.LENGTH_LONG).show()
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
